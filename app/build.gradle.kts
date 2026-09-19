@@ -8,11 +8,11 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.arlimusik.inflator"
+        applicationId = "com.arlimusik.inflator.standalone"
         minSdk = 26
         targetSdk = 35
-        versionCode = 21
-        versionName = "2.1-tablet"
+        versionCode = 22
+        versionName = "2.1-standalone"
     }
 
     buildTypes {
