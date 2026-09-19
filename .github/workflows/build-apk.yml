@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-apk:
@@ -40,9 +40,18 @@ jobs:
       - name: Rename APK
         run: cp app/build/outputs/apk/debug/app-debug.apk ARLIMUSIK-INFLATOR-2.1-Tablet.apk
 
-      - name: Upload APK
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: ARLIMUSIK-INFLATOR-2.1-Tablet
           path: ARLIMUSIK-INFLATOR-2.1-Tablet.apk
           if-no-files-found: error
+
+      - name: Publish direct-download GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete tablet-test --yes --cleanup-tag || true
+          git tag -f tablet-test
+          git push -f origin tablet-test
+          gh release create tablet-test ARLIMUSIK-INFLATOR-2.1-Tablet.apk             --title "ARLIMUSIK INFLATOR 2.1 Tablet Test"             --notes "Исправленная тестовая Android-версия для планшета. MIUI startup crash fixed."
