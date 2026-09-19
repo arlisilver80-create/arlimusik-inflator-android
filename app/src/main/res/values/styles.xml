@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.ARLIMUSIK" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:navigationBarColor">#06191B</item>
+        <item name="android:colorAccent">#E8BD4D</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
