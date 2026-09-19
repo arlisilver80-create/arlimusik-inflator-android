@@ -3,6 +3,8 @@
     <application
         android:allowBackup="true"
         android:label="ARLIMUSIK INFLATOR 2.1"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher"
         android:theme="@style/Theme.ARLIMUSIK">
         <activity
             android:name=".MainActivity"
