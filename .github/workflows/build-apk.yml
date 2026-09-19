@@ -38,20 +38,22 @@ jobs:
         run: gradle --no-daemon assembleDebug
 
       - name: Rename APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk ARLIMUSIK-INFLATOR-2.1-Tablet.apk
+        run: cp app/build/outputs/apk/debug/app-debug.apk ARLIMUSIK-INFLATOR-2.1-CUSTOM-ICON.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ARLIMUSIK-INFLATOR-2.1-Tablet
-          path: ARLIMUSIK-INFLATOR-2.1-Tablet.apk
+          name: ARLIMUSIK-INFLATOR-2.1-CUSTOM-ICON
+          path: ARLIMUSIK-INFLATOR-2.1-CUSTOM-ICON.apk
           if-no-files-found: error
 
-      - name: Publish direct-download GitHub Release
+      - name: Publish new GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release delete tablet-test --yes --cleanup-tag || true
-          git tag -f tablet-test
-          git push -f origin tablet-test
-          gh release create tablet-test ARLIMUSIK-INFLATOR-2.1-Tablet.apk             --title "ARLIMUSIK INFLATOR 2.1 Tablet Test"             --notes "Исправленная тестовая Android-версия для планшета. MIUI startup crash fixed."
+          gh release delete v2.1-custom-icon --yes --cleanup-tag || true
+          git tag -f v2.1-custom-icon
+          git push -f origin v2.1-custom-icon
+          gh release create v2.1-custom-icon ARLIMUSIK-INFLATOR-2.1-CUSTOM-ICON.apk \
+            --title "ARLIMUSIK INFLATOR 2.1 — Custom Icon" \
+            --notes "Новая тестовая Android-сборка с фирменной иконкой ARLIMUSIK и исправлением запуска на MIUI."
