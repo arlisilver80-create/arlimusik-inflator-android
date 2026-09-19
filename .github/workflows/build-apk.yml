@@ -38,22 +38,22 @@ jobs:
         run: gradle --no-daemon assembleDebug
 
       - name: Rename APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk ARLIMUSIK-INFLATOR-2.1-CUSTOM-ICON.apk
+        run: cp app/build/outputs/apk/debug/app-debug.apk ARLIMUSIK-INFLATOR-2.1-NEW-APP.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ARLIMUSIK-INFLATOR-2.1-CUSTOM-ICON
-          path: ARLIMUSIK-INFLATOR-2.1-CUSTOM-ICON.apk
+          name: ARLIMUSIK-INFLATOR-2.1-NEW-APP
+          path: ARLIMUSIK-INFLATOR-2.1-NEW-APP.apk
           if-no-files-found: error
 
-      - name: Publish new GitHub Release
+      - name: Publish standalone GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release delete v2.1-custom-icon --yes --cleanup-tag || true
-          git tag -f v2.1-custom-icon
-          git push -f origin v2.1-custom-icon
-          gh release create v2.1-custom-icon ARLIMUSIK-INFLATOR-2.1-CUSTOM-ICON.apk \
-            --title "ARLIMUSIK INFLATOR 2.1 — Custom Icon" \
-            --notes "Новая тестовая Android-сборка с фирменной иконкой ARLIMUSIK и исправлением запуска на MIUI."
+          gh release delete v2.1-new-app --yes --cleanup-tag || true
+          git tag -f v2.1-new-app
+          git push -f origin v2.1-new-app
+          gh release create v2.1-new-app ARLIMUSIK-INFLATOR-2.1-NEW-APP.apk \
+            --title "ARLIMUSIK INFLATOR 2.1 — New App" \
+            --notes "Отдельное Android-приложение с новым package ID и фирменной иконкой. Устанавливается рядом с предыдущей версией."
